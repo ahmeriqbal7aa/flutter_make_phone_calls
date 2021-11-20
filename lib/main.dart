@@ -10,8 +10,8 @@ class MyApp extends StatelessWidget {
   TextEditingController phoneCallController = new TextEditingController();
 
   /// TODO Direct Phone Call Function
-  void makeDirectCall(String phone) {
-    FlutterPhoneDirectCaller.callNumber(phone);
+  void makeDirectCall(String phone) async {
+    await FlutterPhoneDirectCaller.callNumber(phone);
   }
 
   /// TODO Indirect Phone Call Function
