@@ -14,6 +14,16 @@ class MyApp extends StatelessWidget {
     FlutterPhoneDirectCaller.callNumber(phone);
   }
 
+  /// TODO Indirect Phone Call Function
+  void launchCall(String phone) async {
+    String url = "tel:" + phone;
+    if (await canLaunch(url)) {
+      await launch(url);
+    } else {
+      print(' Could not launch $url');
+    }
+  }
+
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
@@ -71,7 +81,9 @@ class MyApp extends StatelessWidget {
                 /// TODO Indirect Call
                 // ignore: deprecated_member_use
                 FlatButton.icon(
-                  onPressed: () {},
+                  onPressed: () => _formKey.currentState.validate()
+                      ? launchCall(phoneCallController.text)
+                      : print("Valid Phone No Required!"),
                   color: Colors.teal[700],
                   icon: Icon(Icons.phone_android,
                       color: Colors.white, size: 20.0),
