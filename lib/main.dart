@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:url_launcher/url_launcher.dart';
+import 'package:flutter_phone_direct_caller/flutter_phone_direct_caller.dart';
 
 void main() => runApp(MyApp());
 
@@ -7,7 +9,11 @@ class MyApp extends StatelessWidget {
   final GlobalKey<FormState> _formKey = new GlobalKey<FormState>();
   TextEditingController phoneCallController = new TextEditingController();
 
-  /// TODO Phone Call Function
+  /// TODO Direct Phone Call Function
+  void makeDirectCall(String phone) {
+    FlutterPhoneDirectCaller.callNumber(phone);
+  }
+
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
@@ -26,20 +32,9 @@ class MyApp extends StatelessWidget {
               child: Form(
                 key: _formKey,
                 child: TextFormField(
-                  style: TextStyle(fontSize: 16.0, color: Colors.black),
+                  style: TextStyle(fontSize: 17.0, color: Colors.black),
                   decoration: InputDecoration(
-                    focusedBorder: UnderlineInputBorder(
-                        borderSide: BorderSide(color: Colors.black)),
-                    enabledBorder: UnderlineInputBorder(
-                        borderSide: BorderSide(color: Colors.grey)),
-                    prefixIcon: Icon(Icons.phone),
-                    labelText: "Phone Number",
-                    labelStyle: TextStyle(
-                      color: Colors.grey,
-                      fontFamily: 'Montserrat',
-                      fontWeight: FontWeight.bold,
-                    ),
-                  ),
+                      prefixIcon: Icon(Icons.phone), labelText: "Phone Number"),
                   controller: phoneCallController,
                   validator: (val) {
                     return RegExp(
@@ -59,7 +54,9 @@ class MyApp extends StatelessWidget {
                 /// TODO Direct Call
                 // ignore: deprecated_member_use
                 FlatButton.icon(
-                  onPressed: () {},
+                  onPressed: () => _formKey.currentState.validate()
+                      ? makeDirectCall(phoneCallController.text)
+                      : print("Valid Phone No Required!"),
                   color: Colors.teal[700],
                   icon: Icon(Icons.phone, color: Colors.white, size: 20.0),
                   label: Text(
