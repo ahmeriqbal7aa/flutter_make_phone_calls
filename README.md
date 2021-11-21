@@ -13,11 +13,11 @@ samples, guidance on mobile development, and a full API reference.
 - Add these lines to ```AndroidManifest.xml``` under ```manifest```.
 ```
 <queries>
-    <!-- If your app makes calls -->
-    <intent>
-        <action android:name="android.intent.action.DIAL" />
-        <data android:scheme="tel" />
-    </intent>
+  <!-- If your app makes calls -->
+  <intent>
+    <action android:name="android.intent.action.DIAL" />
+    <data android:scheme="tel" />
+  </intent>
 </queries>
 ```
 
